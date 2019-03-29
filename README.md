@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Deployed by `gh-pages` at:
-https://agap2-ag.github.io/react-table_form_api/
+https://agap2-ag.github.io/antd-samples-app/
 
 ## Available Scripts
 
