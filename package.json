@@ -1,0 +1,41 @@
+{
+  "name": "antd-samples-app",
+  "version": "0.1.0",
+  "description": "Showcase of Ant Design components",
+  "private": false,
+  "homepage": "https://agap2-ag.github.io/antd-samples-app/",
+  "dependencies": {
+    "antd": "^3.15.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "2.1.8"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  },
+  "scripts": {
+    "deploy": "npm run build && gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "keywords": [
+    "reactjs",
+    "create-react-app",
+    "Ant Design",
+    "form"
+  ],
+  "author": "agap2-ag",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

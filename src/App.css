@@ -1,0 +1,71 @@
+html {
+  position: relative;
+  min-height: 100vh;
+  font-size: 62.5%;
+  color: white;
+}
+
+html body {
+  background-color: #efefef;
+}
+
+header, footer {
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-between;
+  min-height: 3rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+main {
+  min-height: 90vh;
+}
+
+main h2, main h3 {
+  margin: 2rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #777;
+}
+
+.logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 3rem;
+  pointer-events: none;
+}
+
+.link {
+  color: #61dafb;
+}
+
+.datepicker__wrapper {
+  margin: 5px;
+  width: 200px;
+}
+
+/* Alternative to Bootstrap
+.row {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.col {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}*/
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
