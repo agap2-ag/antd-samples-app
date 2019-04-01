@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+import 'moment/locale/pt';
 import {
   Alert,
   Cascader,
@@ -10,6 +12,8 @@ import {
   TimePicker,
   Select,
 } from 'antd';
+import {KeyPickRange} from './KeyStrokeDetect';
+import './Forms.css';
 
 class FormDatePickerAlert extends Component {
 
@@ -18,23 +22,24 @@ class FormDatePickerAlert extends Component {
   };
 
   handleChange = date => {
-    message.info(`Selected Date: ${date ? date.format("YYYY-MM-DD") : "None"}`);
+    message.info(`-> ${date ? date.format("YYYY-MM-DD") : "None"}`);
     this.setState({ date });
   };
 
-
   render() {
     const { date } = this.state;
+    moment.locale('pt');
+    // https://ant.design/components/locale-provider/
     return (
       <div>
         <p>Adapted from&nbsp;
           <a href="https://ant.design/docs/react/getting-started" target="_blank" rel="noopener noreferrer"><code>antd</code> Getting Started docs</a>
         </p>
-        <div className="datepicker__wrapper">
+        <div className="inwrap">
           <DatePicker onChange={this.handleChange} />
-          <div className="datepicker__msg">
+          <div className="msg">
             <Alert
-              message={`Selected Date: ${date ? date.format('YYYY-MM-DD') : 'None'}`}
+              message={`Data: ${date ? date.format('YYYY-MM-DD') : 'None'}`}
               type="success"
             />
           </div>
@@ -44,6 +49,84 @@ class FormDatePickerAlert extends Component {
   }
 }
 
+class FormMonthPicker extends Component {
+  render() {
+    const MonthPicker = DatePicker.MonthPicker;
+    return (
+      <div className="inwrap">
+        <MonthPicker />
+      </div>
+    );
+  }
+}
+
+class FormWeekPicker extends Component {
+  render() {
+    const WeekPicker = DatePicker.WeekPicker;
+    return (
+      <div className="inwrap">
+        <WeekPicker />
+      </div>
+    );
+  }
+}
+
+class FormDateRangeAlert extends Component {
+
+  state = {
+    dateFrom: null,
+    dateTo: null,
+  };
+
+  handleChange = (dates, dateStrings) => {
+    message.info(`From: ${
+      dates[0] ? dateStrings[0] : "None"}, to: ${
+      dates[1] ? dateStrings[1] : "None"}`);
+    this.setState({ dateFrom: dates[0], dateTo: dates[1] });
+  };
+
+  render() {
+    const RangePicker = DatePicker.RangePicker;
+
+    document.addEventListener('keydown', KeyPickRange);
+    return (
+      <div>
+        <p>Adapted from&nbsp;
+          <a href="https://ant.design/components/date-picker" target="_blank" rel="noopener noreferrer"><code>antd</code> Date Picker docs</a>
+        </p>
+        <p>Shortcut keys to set date:  English (D-toDay; Y–Yesterday; T-Tomorrow)<br/>
+          Keys are localized to Portugal: H-Hoje; O-Ontem; A-Amanhã
+        </p>
+        <div className="inwrap">
+          <RangePicker
+            ranges={{
+              Yesterday: [moment().subtract(1, 'days'), moment()],
+              Today: [moment(), moment()],
+              Tomorrow: [moment(), moment().add(1, 'days')],
+              'Last month': [moment().startOf('month'), moment().endOf('month')]
+            }}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="inwrap">
+          <RangePicker
+            ranges={{
+              Yesterday: [moment().subtract(1, 'days'), moment()],
+              Today: [moment(), moment()],
+              Tomorrow: [moment(), moment().add(1, 'days')],
+              'Yesterday (since 0h)': [moment().subtract(1, 'days').startOf('day'), moment()],
+              'Today (since 0h)': [moment().startOf('day'), moment()],
+              'Last month': [moment().startOf('month'), moment().endOf('month')]
+            }}
+            showTime
+            format="YYYY/MM/DD HH:mm:ss"
+            onChange={this.handleChange}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 class FormPrimeVal extends Component {
   state = {
     number: {
@@ -257,6 +340,9 @@ class FormValSamples extends Component {
 
 export {
   FormDatePickerAlert,
+  FormMonthPicker,
+  FormWeekPicker,
+  FormDateRangeAlert,
   FormPrimeVal,
   FormValSamples
 }

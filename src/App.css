@@ -9,7 +9,7 @@ html body {
   background-color: #efefef;
 }
 
-header, footer {
+.header, .footer {
   align-items: center;
   background-color: #282c34;
   color: white;
@@ -41,9 +41,12 @@ main h2, main h3 {
   color: #61dafb;
 }
 
-.datepicker__wrapper {
-  margin: 5px;
-  width: 200px;
+.link:hover {
+  color: white;
+}
+
+.fgrow {
+  flex-grow: 1;
 }
 
 /* Alternative to Bootstrap

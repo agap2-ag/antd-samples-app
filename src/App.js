@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { FormDatePickerAlert, FormPrimeVal , FormValSamples } from './Forms/FormSamples';
+import { 
+  FormDatePickerAlert,
+  FormMonthPicker,
+  FormWeekPicker,
+  FormDateRangeAlert,
+  FormPrimeVal ,
+  FormValSamples
+} from './Forms/FormSamples';
 import './App.css';
+import {
+  LocaleProvider
+} from 'antd';
+import pt_PT from 'antd/lib/locale-provider/pt_PT';
 import 'antd/dist/antd.css';
 
 class App extends Component {
@@ -17,9 +28,11 @@ class App extends Component {
 
   render() {
     return (
+      <LocaleProvider locale={pt_PT}>
       <div className="app">
         <header className="header">
           <img src={logo} className="logo" alt="logo" />
+          <div className="fgrow">
           <span>
             An&nbsp;
             <a className="link" title="React's antd" href="https://ant.design/docs/react/introduce" target="_blank" rel="noopener noreferrer">
@@ -29,6 +42,12 @@ class App extends Component {
               <code>create-react-app</code>
             </a>
           </span>
+          </div>
+          <div>
+          <a className="link flex-grow" target="_blank" rel="noreferrer" href="https://github.com/agap2-ag/antd-samples-app">
+            GitHub
+          </a>
+          </div>
         </header>
         <main className="container">
           <h2>Forms</h2>
@@ -38,8 +57,14 @@ class App extends Component {
             <hr />
             <div className="row">
               <div className="col">
-                <h3>DatePicker Alert</h3>
+                <h3>Dates, Times, Alerts</h3>
                 <FormDatePickerAlert />
+                <h4>Months</h4>
+                <FormMonthPicker />
+                <h4>Weeks</h4>
+                <FormWeekPicker />
+                <h4>Ranges</h4>
+                <FormDateRangeAlert />
               </div>
               <div className="col">
                 <h3>Prime Validation</h3>
@@ -48,7 +73,7 @@ class App extends Component {
             </div>
           </section>
         </main>
-        <footer>
+        <footer className="footer">
           <a
             className="link"
             href="https://reactjs.org"
@@ -59,6 +84,7 @@ class App extends Component {
           </a>
         </footer>
       </div>
+      </LocaleProvider>
     );
   }
 }
