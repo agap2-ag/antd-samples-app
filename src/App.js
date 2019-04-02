@@ -5,7 +5,9 @@ import {
   FormMonthPicker,
   FormWeekPicker,
   FormDateRangeAlert,
-  FormPrimeVal ,
+  FormPrimeVal,
+  FormSelectSamples,
+  FormDropdownSamples,
   FormValSamples
 } from './Forms/FormSamples';
 import './App.css';
@@ -13,6 +15,9 @@ import {
   Affix,
   Anchor,
   Col,
+  Divider,
+  Empty,
+  Icon,
   LocaleProvider,
   Row
 } from 'antd';
@@ -45,19 +50,19 @@ class App extends Component {
           <header className="header">
             <img src={logo} className="logo" alt="logo" />
             <div className="fgrow">
-            <span>
-              An&nbsp;
-              <a className="link-green" title="React's antd" href="https://ant.design/docs/react/introduce" target="_blank" rel="noopener noreferrer">
-                Ant Design
-              </a> example created through&nbsp;
-              <a className="link-green" title="single-page app generator" href="https://github.com/facebookincubator/create-react-app"  target="_blank" rel="noopener noreferrer">
-                <code>create-react-app</code>
-              </a>
-            </span>
+              <h1>
+                An&nbsp;
+                <a className="link-green" title="React's antd" href="https://ant.design/docs/react/introduce" target="_blank" rel="noopener noreferrer">
+                  Ant Design
+                </a> example created through&nbsp;
+                <a className="link-green" title="single-page app generator" href="https://github.com/facebookincubator/create-react-app"  target="_blank" rel="noopener noreferrer">
+                  <code>create-react-app</code>
+                </a>
+              </h1>
             </div>
             <div>
             <a className="link-green flex-grow" title="Source code" href="https://github.com/agap2-ag/antd-samples-app"  target="_blank"  rel="noopener noreferrer">
-              GitHub
+              <Icon type="github" />
             </a>
             </div>
           </header>
@@ -68,6 +73,7 @@ class App extends Component {
               <Link href="#forms" title="Forms">
                 <Link href="#val-samples" title="Validation samples" />
                 <Link href="#pickers" title="Pickers" />
+                <Link href="#options-lists" title="Options Lists (Dropdowns)" />
               </Link>
               <Link href="#info" title="General information" />
             </Anchor>
@@ -94,19 +100,33 @@ class App extends Component {
                   </div>
                 </Col>
                 <Col xs={24} sm={12}>
-                  <h3>Prime Validation</h3>
+                  <h3>Validation with tips</h3>
                   <FormPrimeVal />
+                  <h3 id="options-lists">Options Lists</h3>
+                  <Divider orientation="right">
+                    Dropdowns
+                  </Divider>
+                  <FormDropdownSamples />
+                  <Divider orientation="right">
+                    Selects
+                  </Divider>
+                  <FormSelectSamples />
                 </Col>
               </Row>
             </section>
             <section id="info">
-              <h3>General info</h3>
-              <p>The purpose of this page is to showcase a set of samples depicting
-              different components from&nbsp;
-                <a title="React's antd" href="https://ant.design/docs/react/introduce" target="_blank" rel="noopener noreferrer">
-                  Ant Design.
-                </a>
-              </p>
+              <h2>General info</h2>
+              <Empty image={logo} description={[
+                <p>The purpose of this page is to showcase a
+                 set of samples depicting different components from&nbsp;
+                  <a title="React's antd" href="https://ant.design/docs/react/introduce" target="_blank" rel="noopener noreferrer">
+                    Ant Design.
+                  </a>
+                </p>,
+                <a className="link-green flex-grow" title="Source code" href="https://github.com/agap2-ag/antd-samples-app"  target="_blank"  rel="noopener noreferrer">
+                  <Icon type="github" style={{fontSize: "24rem"}} rotate="-45" />
+                </a>,
+              ]} />
             </section>
           </main>
         </div>

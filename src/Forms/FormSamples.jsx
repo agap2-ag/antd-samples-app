@@ -1,24 +1,45 @@
 import React, { Component } from 'react';
+import ReactJson from 'react-json-view'
 import moment from 'moment';
 import 'moment/locale/pt';
 import {
   Alert,
+  Button,
   Cascader,
   Col,
   DatePicker,
+  Divider,
+  Empty,
   Form,
   Input,
   InputNumber,
   message,
+  Modal,
   Row,
   Select,
   TimePicker,
+  Menu, Dropdown, Icon
 } from 'antd';
 import {KeyPickRange} from './KeyStrokeDetect';
 import './Forms.css';
 
-class FormDatePickerAlert extends Component {
+const Option = Select.Option;
+const SubMenu = Menu.SubMenu;
+const MItem = Menu.Item;
+const OPTIONS = ['Apples', 'Nails', 'Bananas', 'Helicopters'];
+const defaultOpts = OPTIONS.map(item => (
+    <Option key={item} value={item}>
+      {item}
+    </Option>
+  )
+);
+const defaultMenuIts = OPTIONS.map(item => (
+    <MItem key={item}><Icon type="smile" spin />{item}</MItem>
+  )
+);
 
+
+class FormDatePickerAlert extends Component {
   state = {
     date: null,
   };
@@ -74,7 +95,6 @@ class FormWeekPicker extends Component {
 }
 
 class FormDateRangeAlert extends Component {
-
   state = {
     dateFrom: null,
     dateTo: null,
@@ -130,6 +150,7 @@ class FormDateRangeAlert extends Component {
     );
   }
 }
+
 class FormPrimeVal extends Component {
   state = {
     number: {
@@ -138,15 +159,12 @@ class FormPrimeVal extends Component {
   };
 
   validatePrimeNumber = (number) => {
-    if (number === 11) {
-      return {
-        validateStatus: 'success',
-        errorMsg: null,
-      };
-    }
-    return {
+    return (number === 11) ? {
+      validateStatus: 'success',
+      errorMsg: null,
+    } : {
       validateStatus: 'error',
-      errorMsg: 'The prime between 8 and 12 is 11!',
+      errorMsg: '11 is the only valid prime!',
     };
   }
 
@@ -161,7 +179,7 @@ class FormPrimeVal extends Component {
 
   render() {
     const formItemLayout = {
-      labelCol: { span: 7 },
+      labelCol: { span: 12 },
       wrapperCol: { span: 12 },
     };
     const number = this.state.number;
@@ -187,6 +205,172 @@ class FormPrimeVal extends Component {
           </Form.Item>
         </Form>
       </div>
+    );
+  }
+}
+
+class FormDropdownSamples extends Component {
+  state = {
+    loading: false,
+    visible: false,
+    chosen: ''
+  }
+
+  funs = {
+    openModal: (v) => {
+      this.setState({visible:true, chosen: v.key})
+    },
+    closeModal: () => {
+      this.setState({visible:false})
+    },
+    delayAct: () => {
+      this.setState({loading:true});
+      setTimeout(() => {
+        this.setState({ loading: false, visible: false });
+      }, 3000);
+    }
+  }
+
+  render() {
+    const { visible, loading, chosen } = this.state;
+    const menu = (
+      <Menu onClick={this.funs.openModal}>
+        {defaultMenuIts}
+        <SubMenu title="sub menu">
+          <MItem key="1"><Icon type="user" />mitem 1</MItem>
+          <MItem key="2">mitem 2</MItem>
+        </SubMenu>
+        <SubMenu title="disabled sub menu" disabled>
+          <MItem key="3">mitem</MItem>
+          <MItem key="4">mitem</MItem>
+        </SubMenu>
+      </Menu>
+    );
+    return (
+      <Row gutter={12}>
+        <p>Clicking the options trigger a <b>Modal</b> and don't change the clicked element</p>
+        <Col span={12}>
+          <h4>Simple</h4>
+          <Dropdown overlay={menu}>
+            <Button>
+              Cascading menu <Icon type="down" />
+            </Button>
+          </Dropdown>
+        </Col>
+        <Col span={12}>
+          <h4>Triggered by right-click</h4>
+          <Dropdown overlay={menu} trigger={['contextMenu']}>
+            <Button>
+              Cascading menu <Icon type="down" />
+            </Button>
+          </Dropdown>
+        </Col>
+        <Modal
+          visible={visible}
+          title={[
+            <h2><Icon type="info-circle" /> You chose {chosen}!</h2>
+          ]}
+          onOk={this.funs.delayAct}
+          okType="warning"
+          onCancel={this.funs.closeModal}
+          footer={[
+            <Button key="back" type="danger" onClick={this.funs.closeModal}>Choose again</Button>,
+            <Button key="submit" type="primary" loading={loading} onClick={this.funs.delayAct}>
+              Yes
+            </Button>,
+          ]}
+          width="80%"
+          bodyStyle={{height: "80vh", overflow: "auto"}}
+          centered
+        >
+          
+          <Empty description={[
+            <Icon type="warning" style={{fontSize: "34rem"}} />,
+            <h3>Your choice is about to be recorded!</h3>,
+            <p>Nothing more to show for the moment.</p>,
+            <h4>Are you sure {chosen} is your choice?</h4>,
+          ]} />
+        </Modal>
+      </Row>
+    );
+  }
+}
+
+class FormSelectSamples extends Component {
+  state = {
+    selectedItems: [],
+  };
+
+  funs = {
+    selectedInfo: value => {
+      message.info(`selected ${value}`);
+    },
+    multiChangeItems: selectedItems => {
+      this.funs.selectedInfo(selectedItems[selectedItems.length-1])
+      this.setState({ selectedItems });
+    },
+    filterSelDrop: (input, option) => {
+      const opts = option.props.children;
+      return opts.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    },
+    add2Dropdown: menu => (
+      <div>
+        {menu}
+        <Divider style={{ margin: '4px 0' }} />
+        <div style={{ padding: '8px', cursor: 'pointer' }}>
+          <Icon type="plus" /> Add item
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    const { selectedItems } = this.state;
+    const filteredOptions = OPTIONS.filter(o => !selectedItems.includes(o));
+    return (
+      <Row gutter={12}>
+        <p>Clicking the options alter a value of an input</p>
+        <Col span={12}>
+          <h4>Multi</h4>
+          <Select
+            mode="multiple"
+            placeholder="Please select"
+            defaultValue={OPTIONS[2]}
+            onChange={this.funs.multiChangeItems}
+            tokenSeparators={[',']}
+            allowClear
+          >
+            {defaultOpts}
+          </Select>
+          <h4>Multi removing options</h4>
+          <Select
+            mode="multiple"
+            placeholder="Hides already selected"
+            value={selectedItems}
+            onChange={this.funs.multiChangeItems}
+          >
+            {filteredOptions.map(item => (
+              <Option key={item} value={item}>
+                {item}
+              </Option>
+            ))}
+          </Select>
+        </Col>
+        <Col span={12}>
+          <h4>Single-dropdown-like</h4>
+          <Select
+            showSearch
+            placeholder="Select a person"
+            optionFilterProp="children"
+            onChange={this.funs.selectedInfo}
+            filterOption={this.funs.filterSelDrop}
+            dropdownRender={this.funs.add2Dropdown}
+            notFoundContent="Not in the list!"
+          >
+            {defaultOpts}
+          </Select>
+        </Col>
+      </Row>
     );
   }
 }
@@ -223,6 +407,13 @@ class FormValSamples extends Component {
         <Row>
           <Col span={8}>
             <Form.Item
+              label="Success"
+              hasFeedback
+              validateStatus="success"
+            >
+              <Input placeholder="I'm the content" id="success" />
+            </Form.Item>
+            <Form.Item
               label="Fail"
               validateStatus="error"
               help="Should be combination of numbers & alphabets"
@@ -245,22 +436,15 @@ class FormValSamples extends Component {
             >
               <Input placeholder="Validating" id="validating" />
             </Form.Item>
+
+          </Col>
+          <Col span={8}>
             <Form.Item
               label="Success"
               hasFeedback
               validateStatus="success"
             >
-              <Input placeholder="I'm the content" id="success" />
-            </Form.Item>
-
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label="Warning"
-              hasFeedback
-              validateStatus="warning"
-            >
-              <Input placeholder="Warning" id="warning2" />
+              <InputNumber style={{ width: '100%' }} />
             </Form.Item>
 
             <Form.Item
@@ -273,19 +457,19 @@ class FormValSamples extends Component {
             </Form.Item>
 
             <Form.Item
-              label="Success"
-              hasFeedback
-              validateStatus="success"
-            >
-              <DatePicker style={{ width: '100%' }} />
-            </Form.Item>
-
-            <Form.Item
               label="Warning"
               hasFeedback
               validateStatus="warning"
             >
-              <TimePicker style={{ width: '100%' }} />
+              <Input placeholder="Warning" id="warning2" />
+            </Form.Item>
+            <Form.Item
+              label="Validating"
+              hasFeedback
+              validateStatus="validating"
+              help="The information is being validated..."
+            >
+              <Cascader defaultValue={['1']} options={[]} />
             </Form.Item>
 
           </Col>
@@ -301,14 +485,10 @@ class FormValSamples extends Component {
                 <Option value="3">Option 3</Option>
               </Select>
             </Form.Item>
-            <Form.Item
-              label="Validating"
-              hasFeedback
-              validateStatus="validating"
-              help="The information is being validated..."
-            >
-              <Cascader defaultValue={['1']} options={[]} />
-            </Form.Item>
+
+            <Divider orientation="right">
+              Pickers
+            </Divider>
 
             <Form.Item
               label="inline"
@@ -336,7 +516,15 @@ class FormValSamples extends Component {
               hasFeedback
               validateStatus="success"
             >
-              <InputNumber style={{ width: '100%' }} />
+              <DatePicker style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              label="Warning"
+              hasFeedback
+              validateStatus="warning"
+            >
+              <TimePicker style={{ width: '100%' }} />
             </Form.Item>
           </Col>
         </Row>
@@ -351,5 +539,7 @@ export {
   FormWeekPicker,
   FormDateRangeAlert,
   FormPrimeVal,
-  FormValSamples
+  FormSelectSamples,
+  FormDropdownSamples,
+  FormValSamples,
 }

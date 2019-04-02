@@ -2,3 +2,7 @@
   margin: 5px;
   width: 200px;
 }
+
+.ant-select {
+  width: 100%;
+}
