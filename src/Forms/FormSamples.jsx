@@ -4,13 +4,15 @@ import 'moment/locale/pt';
 import {
   Alert,
   Cascader,
+  Col,
   DatePicker,
   Form,
   Input,
   InputNumber,
   message,
-  TimePicker,
+  Row,
   Select,
+  TimePicker,
 } from 'antd';
 import {KeyPickRange} from './KeyStrokeDetect';
 import './Forms.css';
@@ -94,8 +96,9 @@ class FormDateRangeAlert extends Component {
         <p>Adapted from&nbsp;
           <a href="https://ant.design/components/date-picker" target="_blank" rel="noopener noreferrer"><code>antd</code> Date Picker docs</a>
         </p>
-        <p>Shortcut keys to set date:  English (D-toDay; Y–Yesterday; T-Tomorrow)<br/>
-          Keys are localized to Portugal: H-Hoje; O-Ontem; A-Amanhã
+        <p>When opened date can be set with keys H-Hoje; O-Ontem; A-Amanhã<br/>
+          (due to current locale: <code>&lt;html lang="pt"&gt;)</code>.<br/>
+          English locale keys: D-toDay; Y–Yesterday; T-Tomorrow
         </p>
         <div className="inwrap">
           <RangePicker
@@ -196,25 +199,29 @@ class FormValSamples extends Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 },
+        sm: { span: 24 },
+        md: { span: 24 },
+        lg: { span: 6 },
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 12 },
+        xs: { span: 10 },
+        sm: { span: 23 },
+        md: { span: 23 },
+        lg: { span: 12 },
       },
     };
 
     return (
       <Form {...formItemLayout}>
-        <div className="row">
-          <div className="col">
+        <Row>
+          <Col span={24}>
             <p>Adapted from&nbsp;
               <a href="https://ant.design/components/form/#components-form-demo-validate-static" target="_blank" rel="noopener noreferrer"><code>antd</code> Validation options docs</a>
             </p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8}>
             <Form.Item
               label="Fail"
               validateStatus="error"
@@ -246,8 +253,8 @@ class FormValSamples extends Component {
               <Input placeholder="I'm the content" id="success" />
             </Form.Item>
 
-          </div>
-          <div className="col">
+          </Col>
+          <Col span={8}>
             <Form.Item
               label="Warning"
               hasFeedback
@@ -281,8 +288,8 @@ class FormValSamples extends Component {
               <TimePicker style={{ width: '100%' }} />
             </Form.Item>
 
-          </div>
-          <div className="col">
+          </Col>
+          <Col span={8}>
             <Form.Item
               label="Error"
               hasFeedback
@@ -331,8 +338,8 @@ class FormValSamples extends Component {
             >
               <InputNumber style={{ width: '100%' }} />
             </Form.Item>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Form>
     );
   }

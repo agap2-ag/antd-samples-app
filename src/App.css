@@ -12,7 +12,7 @@ html body {
 .header, .footer {
   align-items: center;
   background-color: #282c34;
-  color: white;
+  color: #ffffff;
   display: flex;
   font-size: 2rem;
   justify-content: space-between;
@@ -21,14 +21,9 @@ html body {
   width: 100%;
 }
 
-main {
-  min-height: 90vh;
-}
-
-main h2, main h3 {
-  margin: 2rem 0;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #777;
+.nav-content {
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {
@@ -37,32 +32,45 @@ main h2, main h3 {
   pointer-events: none;
 }
 
-.link {
+.link-green {
   color: #61dafb;
 }
 
 .link:hover {
-  color: white;
+  color: #ffffff;
+}
+
+aside {
+  border: 1px solid #ccc;
+  min-width: 20vw;
+}
+
+aside .ant-affix {
+  min-height: 90vh;
+}
+
+aside .ant-anchor-wrapper {
+  background: transparent;
+}
+
+main {
+  min-height: 90vh;
+  padding: 0 1rem;
+}
+
+main h2, main h3 {
+  margin: 2rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #777;
+}
+
+main p {
+  font-size: 1rem;
 }
 
 .fgrow {
   flex-grow: 1;
 }
-
-/* Alternative to Bootstrap
-.row {
-  align-items: flex-start;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.col {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}*/
 
 @keyframes App-logo-spin {
   from {
