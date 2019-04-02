@@ -8,23 +8,23 @@ self.__precacheManifest = [
     "url": "/antd-samples-app/static/js/runtime~main.bf6aab00.js"
   },
   {
-    "revision": "a6ed2e05f738f10670e2",
-    "url": "/antd-samples-app/static/js/main.26271c30.chunk.js"
+    "revision": "044b5232582e3e0babe1",
+    "url": "/antd-samples-app/static/js/main.225f253f.chunk.js"
   },
   {
-    "revision": "c57eb036f7fe8d4bb2e6",
-    "url": "/antd-samples-app/static/js/2.14742ec6.chunk.js"
+    "revision": "55f1fbdcc13d53c9dbf4",
+    "url": "/antd-samples-app/static/js/2.318dcfc7.chunk.js"
   },
   {
-    "revision": "a6ed2e05f738f10670e2",
-    "url": "/antd-samples-app/static/css/main.9288ace2.chunk.css"
+    "revision": "044b5232582e3e0babe1",
+    "url": "/antd-samples-app/static/css/main.9336ee1e.chunk.css"
   },
   {
-    "revision": "c57eb036f7fe8d4bb2e6",
+    "revision": "55f1fbdcc13d53c9dbf4",
     "url": "/antd-samples-app/static/css/2.329174fe.chunk.css"
   },
   {
-    "revision": "73bc70ef3f4c40480baafb1523e91154",
+    "revision": "1d016587a8cbb60fa1bee1bae2df6d35",
     "url": "/antd-samples-app/index.html"
   }
 ];
