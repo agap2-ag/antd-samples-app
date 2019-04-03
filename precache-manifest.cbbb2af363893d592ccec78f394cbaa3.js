@@ -8,23 +8,23 @@ self.__precacheManifest = [
     "url": "/antd-samples-app/static/js/runtime~main.bf6aab00.js"
   },
   {
-    "revision": "044b5232582e3e0babe1",
-    "url": "/antd-samples-app/static/js/main.225f253f.chunk.js"
+    "revision": "7e81408e633931490d13",
+    "url": "/antd-samples-app/static/js/main.a1e7622b.chunk.js"
   },
   {
-    "revision": "55f1fbdcc13d53c9dbf4",
-    "url": "/antd-samples-app/static/js/2.318dcfc7.chunk.js"
+    "revision": "e84260a27855056701b7",
+    "url": "/antd-samples-app/static/js/2.2a7367fd.chunk.js"
   },
   {
-    "revision": "044b5232582e3e0babe1",
+    "revision": "7e81408e633931490d13",
     "url": "/antd-samples-app/static/css/main.9336ee1e.chunk.css"
   },
   {
-    "revision": "55f1fbdcc13d53c9dbf4",
+    "revision": "e84260a27855056701b7",
     "url": "/antd-samples-app/static/css/2.329174fe.chunk.css"
   },
   {
-    "revision": "1d016587a8cbb60fa1bee1bae2df6d35",
+    "revision": "0d875c0fe771abcd154cfedf2571799a",
     "url": "/antd-samples-app/index.html"
   }
 ];
