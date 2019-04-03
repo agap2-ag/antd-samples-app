@@ -23,9 +23,11 @@ import {
 import {KeyPickRange} from './KeyStrokeDetect';
 import './Forms.css';
 
+// sub-components
 const Option = Select.Option;
-const SubMenu = Menu.SubMenu;
-const MItem = Menu.Item;
+const {SubMenu, Item} = Menu;
+const ButtonGroup = Button.Group;
+
 const OPTIONS = ['Apples', 'Nails', 'Bananas', 'Helicopters'];
 const defaultOpts = OPTIONS.map(item => (
     <Option key={item} value={item}>
@@ -34,10 +36,167 @@ const defaultOpts = OPTIONS.map(item => (
   )
 );
 const defaultMenuIts = OPTIONS.map(item => (
-    <MItem key={item}><Icon type="smile" spin />{item}</MItem>
+    <Item key={item}><Icon type="smile" spin />{item}</Item>
   )
 );
 
+class FormValSamples extends Component {
+
+  render() {
+    const { Option } = Select;
+
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 24 },
+        md: { span: 24 },
+        lg: { span: 6 },
+      },
+      wrapperCol: {
+        xs: { span: 10 },
+        sm: { span: 23 },
+        md: { span: 23 },
+        lg: { span: 12 },
+      },
+    };
+
+    return (
+      <Form {...formItemLayout}>
+        <Row>
+          <Col span={24}>
+            <p>Adapted from&nbsp;
+              <a href="https://ant.design/components/form/#components-form-demo-validate-static" target="_blank" rel="noopener noreferrer"><code>antd</code> Validation options docs</a>
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={8}>
+            <Form.Item
+              label="Success"
+              hasFeedback
+              validateStatus="success"
+            >
+              <Input placeholder="I'm the content" id="success" />
+            </Form.Item>
+            <Form.Item
+              label="Fail"
+              validateStatus="error"
+              help="Should be combination of numbers & alphabets"
+            >
+              <Input placeholder="unavailable choice" id="error" />
+            </Form.Item>
+
+            <Form.Item
+              label="Warning"
+              validateStatus="warning"
+            >
+              <Input placeholder="Warning" id="warning" />
+            </Form.Item>
+
+            <Form.Item
+              label="Validating"
+              hasFeedback
+              validateStatus="validating"
+              help="The information is being validated..."
+            >
+              <Input placeholder="Validating" id="validating" />
+            </Form.Item>
+
+          </Col>
+          <Col span={8}>
+            <Form.Item
+              label="Success"
+              hasFeedback
+              validateStatus="success"
+            >
+              <InputNumber style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              label="Fail"
+              hasFeedback
+              validateStatus="error"
+              help="Should be combination of numbers & alphabets"
+            >
+              <Input placeholder="unavailable choice" id="error2" />
+            </Form.Item>
+
+            <Form.Item
+              label="Warning"
+              hasFeedback
+              validateStatus="warning"
+            >
+              <Input placeholder="Warning" id="warning2" />
+            </Form.Item>
+            <Form.Item
+              label="Validating"
+              hasFeedback
+              validateStatus="validating"
+              help="The information is being validated..."
+            >
+              <Cascader defaultValue={['1']} options={[]} />
+            </Form.Item>
+
+          </Col>
+          <Col span={8}>
+            <Form.Item
+              label="Error"
+              hasFeedback
+              validateStatus="error"
+            >
+              <Select defaultValue="1">
+                <Option value="1">Option 1</Option>
+                <Option value="2">Option 2</Option>
+                <Option value="3">Option 3</Option>
+              </Select>
+            </Form.Item>
+
+            <Divider orientation="right">
+              Pickers
+            </Divider>
+
+            <Form.Item
+              label="inline"
+              style={{ marginBottom: 0 }}
+            >
+              <Form.Item
+                validateStatus="error"
+                help="Please select the correct date"
+                style={{ display: 'inline-block', width: 'calc(50% - 12px)' }}
+              >
+                <DatePicker />
+              </Form.Item>
+              <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>
+                -
+              </span>
+              <Form.Item
+                style={{ display: 'inline-block', width: 'calc(50% - 12px)' }}
+              >
+                <DatePicker />
+              </Form.Item>
+            </Form.Item>
+
+            <Form.Item
+              label="Success"
+              hasFeedback
+              validateStatus="success"
+            >
+              <DatePicker style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              label="Warning"
+              hasFeedback
+              validateStatus="warning"
+            >
+              <TimePicker style={{ width: '100%' }} />
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    );
+  }
+}
 
 class FormDatePickerAlert extends Component {
   state = {
@@ -63,7 +222,7 @@ class FormDatePickerAlert extends Component {
           <div className="msg">
             <Alert
               message={`Data: ${date ? date.format('YYYY-MM-DD') : 'None'}`}
-              type="success"
+              type="info"
             />
           </div>
         </div>
@@ -237,12 +396,12 @@ class FormDropdownSamples extends Component {
       <Menu onClick={this.funs.openModal}>
         {defaultMenuIts}
         <SubMenu title="sub menu">
-          <MItem key="1"><Icon type="user" />mitem 1</MItem>
-          <MItem key="2">mitem 2</MItem>
+          <Item key="1"><Icon type="user" />mitem 1</Item>
+          <Item key="2">mitem 2</Item>
         </SubMenu>
         <SubMenu title="disabled sub menu" disabled>
-          <MItem key="3">mitem</MItem>
-          <MItem key="4">mitem</MItem>
+          <Item key="3">mitem</Item>
+          <Item key="4">mitem</Item>
         </SubMenu>
       </Menu>
     );
@@ -375,165 +534,110 @@ class FormSelectSamples extends Component {
   }
 }
 
-class FormValSamples extends Component {
+class FormBtnsSamples extends Component {
+ state = {
+    loading: false,
+    iconLoading: false,
+  }
+
+  funs = {
+    enterLoading: () => {
+      this.setState({ loading: true });
+    },
+    enterIconLoading: () => {
+      this.setState({ iconLoading: true });
+    },
+    selectedInfo: value => {
+      message.info(`selected ${value}`);
+    },
+    filterSelDrop: (input, option) => {
+      const opts = option.props.children;
+      return opts.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+    },
+  }
 
   render() {
-    const { Option } = Select;
-
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 24 },
-        md: { span: 24 },
-        lg: { span: 6 },
-      },
-      wrapperCol: {
-        xs: { span: 10 },
-        sm: { span: 23 },
-        md: { span: 23 },
-        lg: { span: 12 },
-      },
-    };
-
     return (
-      <Form {...formItemLayout}>
-        <Row>
-          <Col span={24}>
-            <p>Adapted from&nbsp;
-              <a href="https://ant.design/components/form/#components-form-demo-validate-static" target="_blank" rel="noopener noreferrer"><code>antd</code> Validation options docs</a>
-            </p>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={8}>
-            <Form.Item
-              label="Success"
-              hasFeedback
-              validateStatus="success"
+      <Row gutter={12}>
+        <Col xs={12} sm={8}>
+          <Button type="primary">Primary</Button>
+          <Button>Default</Button>
+          <Button type="dashed">Dashed</Button>
+          <Button type="danger">Danger</Button>
+          <Divider orientation="right">
+            Ghost
+          </Divider>
+          <div style={{ background: 'rgb(200, 200, 200)', padding: '26px 16px 16px' }}>
+            <Button type="primary" ghost>Primary</Button>
+            <Button ghost>Default</Button>
+            <Button type="dashed" ghost>Dashed</Button>
+            <Button type="danger" ghost>danger</Button>
+          </div>
+          <Divider orientation="right">
+            Block
+          </Divider>
+          <Button type="primary" block>Primary</Button>
+          <Button block>Default</Button>
+          <Button type="dashed" block>Dashed</Button>
+          <Button type="danger" block>danger</Button>
+        </Col>
+        <Col xs={12} sm={8}>
+          <Button type="primary" shape="circle" icon="search" />
+          <Button type="primary" icon="search">Search</Button>
+          <Button shape="circle" icon="search" />
+          <Button icon="search">Search</Button>
+          <br />
+          <Button shape="circle" icon="search" />
+          <Button icon="search">Search</Button>
+          <Button type="dashed" shape="circle" icon="search" />
+          <Button type="dashed" icon="search">Search</Button>
+          <Divider orientation="right">
+            With Dropdown
+          </Divider>
+          <ButtonGroup>
+            <Select
+              showSearch
+              showArrow={false}
+              placeholder="Select a person"
+              optionFilterProp="children"
+              onChange={this.funs.selectedInfo}
+              filterOption={this.funs.filterSelDrop}
+              notFoundContent="Search parameter does not match with our records"
             >
-              <Input placeholder="I'm the content" id="success" />
-            </Form.Item>
-            <Form.Item
-              label="Fail"
-              validateStatus="error"
-              help="Should be combination of numbers & alphabets"
-            >
-              <Input placeholder="unavailable choice" id="error" />
-            </Form.Item>
-
-            <Form.Item
-              label="Warning"
-              validateStatus="warning"
-            >
-              <Input placeholder="Warning" id="warning" />
-            </Form.Item>
-
-            <Form.Item
-              label="Validating"
-              hasFeedback
-              validateStatus="validating"
-              help="The information is being validated..."
-            >
-              <Input placeholder="Validating" id="validating" />
-            </Form.Item>
-
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label="Success"
-              hasFeedback
-              validateStatus="success"
-            >
-              <InputNumber style={{ width: '100%' }} />
-            </Form.Item>
-
-            <Form.Item
-              label="Fail"
-              hasFeedback
-              validateStatus="error"
-              help="Should be combination of numbers & alphabets"
-            >
-              <Input placeholder="unavailable choice" id="error2" />
-            </Form.Item>
-
-            <Form.Item
-              label="Warning"
-              hasFeedback
-              validateStatus="warning"
-            >
-              <Input placeholder="Warning" id="warning2" />
-            </Form.Item>
-            <Form.Item
-              label="Validating"
-              hasFeedback
-              validateStatus="validating"
-              help="The information is being validated..."
-            >
-              <Cascader defaultValue={['1']} options={[]} />
-            </Form.Item>
-
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label="Error"
-              hasFeedback
-              validateStatus="error"
-            >
-              <Select defaultValue="1">
-                <Option value="1">Option 1</Option>
-                <Option value="2">Option 2</Option>
-                <Option value="3">Option 3</Option>
-              </Select>
-            </Form.Item>
-
-            <Divider orientation="right">
-              Pickers
-            </Divider>
-
-            <Form.Item
-              label="inline"
-              style={{ marginBottom: 0 }}
-            >
-              <Form.Item
-                validateStatus="error"
-                help="Please select the correct date"
-                style={{ display: 'inline-block', width: 'calc(50% - 12px)' }}
-              >
-                <DatePicker />
-              </Form.Item>
-              <span style={{ display: 'inline-block', width: '24px', textAlign: 'center' }}>
-                -
-              </span>
-              <Form.Item
-                style={{ display: 'inline-block', width: 'calc(50% - 12px)' }}
-              >
-                <DatePicker />
-              </Form.Item>
-            </Form.Item>
-
-            <Form.Item
-              label="Success"
-              hasFeedback
-              validateStatus="success"
-            >
-              <DatePicker style={{ width: '100%' }} />
-            </Form.Item>
-
-            <Form.Item
-              label="Warning"
-              hasFeedback
-              validateStatus="warning"
-            >
-              <TimePicker style={{ width: '100%' }} />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
+              {defaultOpts}
+            </Select>
+            <Button type="primary" icon="search" />
+          </ButtonGroup>
+        </Col>
+        <Col xs={12} sm={8}>
+          <Button type="primary" loading>
+            Loading
+          </Button>
+          <Button type="primary" size="small" loading>
+            Loading
+          </Button>
+          <br />
+          <Button type="primary" loading={this.state.loading} onClick={this.funs.enterLoading}>
+            Click me!
+          </Button>
+          <Button type="primary" icon="poweroff" loading={this.state.iconLoading} onClick={this.funs.enterIconLoading}>
+            Click me!
+          </Button>
+          <br />
+          <Button shape="circle" loading />
+          <Button type="primary" shape="circle" loading />
+        </Col>
+      </Row>
     );
   }
 }
 
+class FormLinksSamples extends Component {
+
+}
+
 export {
+  FormValSamples,
   FormDatePickerAlert,
   FormMonthPicker,
   FormWeekPicker,
@@ -541,5 +645,6 @@ export {
   FormPrimeVal,
   FormSelectSamples,
   FormDropdownSamples,
-  FormValSamples,
+  FormBtnsSamples,
+  FormLinksSamples,
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { 
+  FormValSamples,
   FormDatePickerAlert,
   FormMonthPicker,
   FormWeekPicker,
@@ -8,7 +9,7 @@ import {
   FormPrimeVal,
   FormSelectSamples,
   FormDropdownSamples,
-  FormValSamples
+  FormBtnsSamples,
 } from './Forms/FormSamples';
 import './App.css';
 import {
@@ -75,44 +76,60 @@ class App extends Component {
                 <Link href="#pickers" title="Pickers" />
                 <Link href="#options-lists" title="Options Lists (Dropdowns)" />
               </Link>
+              <Link href="#nav&actions" title="Action Triggers">
+                <Link href="#btns" title="Buttons" />
+                <Link href="#links" title="Links" />
+                <Link href="#breadcrumbs" title="Breadcrumbs" />
+              </Link>
               <Link href="#info" title="General information" />
             </Anchor>
           </aside>
-          <main id="forms" className="container">
-            <h2>Forms</h2>
-            <section>
-              <div id="val-samples">
-                <h3>Validation Samples</h3>
-                <FormValSamples />
-              </div>
-              <hr />
-              <Row gutter={16}>
-                <Col xs={24} sm={12}>
-                  <div id="pickers">
-                    <h3>Dates, Times, Alerts</h3>
-                    <FormDatePickerAlert />
-                    <h4>Months</h4>
-                    <FormMonthPicker />
-                    <h4>Weeks</h4>
-                    <FormWeekPicker />
-                    <h4>Ranges</h4>
-                    <FormDateRangeAlert />
-                  </div>
-                </Col>
-                <Col xs={24} sm={12}>
-                  <h3>Validation with tips</h3>
-                  <FormPrimeVal />
-                  <h3 id="options-lists">Options Lists</h3>
-                  <Divider orientation="right">
-                    Dropdowns
-                  </Divider>
-                  <FormDropdownSamples />
-                  <Divider orientation="right">
-                    Selects
-                  </Divider>
-                  <FormSelectSamples />
-                </Col>
-              </Row>
+          <main className="container">
+            <section id="forms">
+              <h2>Forms</h2>
+              <section>
+                <div id="val-samples">
+                  <h3>Validation Samples</h3>
+                  <FormValSamples />
+                </div>
+                <hr />
+                <Row gutter={16}>
+                  <Col xs={24} sm={12}>
+                    <div id="pickers">
+                      <h3>Dates, Times, Alerts</h3>
+                      <FormDatePickerAlert />
+                      <h4>Months</h4>
+                      <FormMonthPicker />
+                      <h4>Weeks</h4>
+                      <FormWeekPicker />
+                      <h4>Ranges</h4>
+                      <FormDateRangeAlert />
+                    </div>
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <h3>Validation with tips</h3>
+                    <FormPrimeVal />
+                    <h3 id="options-lists">Options Lists</h3>
+                    <Divider orientation="right">
+                      Dropdowns
+                    </Divider>
+                    <FormDropdownSamples />
+                    <Divider orientation="right">
+                      Selects
+                    </Divider>
+                    <FormSelectSamples />
+                  </Col>
+                </Row>
+              </section>
+            </section>
+            <section id="nav&actions">
+              <h2>Action triggers</h2>
+              <section id="btns">
+                <h3>Buttons</h3>
+                <FormBtnsSamples />
+              </section>
+              <section id="links">
+              </section>
             </section>
             <section id="info">
               <h2>General info</h2>
