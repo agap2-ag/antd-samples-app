@@ -6,3 +6,42 @@
 .ant-select {
   width: 100%;
 }
+
+.ant-btn {
+  margin: 1rem;
+}
+
+.ant-input-search-enter-button + .ant-input-group-addon .ant-input-search-button, .ant-input-search-enter-button input + .ant-input-group-addon .ant-input-search-button,
+.ant-btn:not(.ant-btn-circle):not(.ant-btn-circle-outline).ant-btn-icon-only {
+  margin: 0;
+}
+
+/* Customized search bar with Select component and hidden Input */
+
+.search-select .ant-input-group-addon:first-child {
+  width: 100%;
+  padding: 0;
+}
+
+.search-select .ant-input-group-addon .ant-select {
+  width: 100% !important;
+}
+
+.search-select .ant-input-group-addon .ant-select-focused .ant-select-selection {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.search-select .ant-input-group-addon:last-child {
+  padding: 0;
+  width: auto;
+  display: inline-block;
+}
+
+.search-select .ant-btn-icon-only {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.search-select .ant-input-group .ant-input {
+  display: none;
+}

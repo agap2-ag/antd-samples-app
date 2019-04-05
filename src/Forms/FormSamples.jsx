@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactJson from 'react-json-view'
+// import ReactJson from 'react-json-view'
 import moment from 'moment';
 import 'moment/locale/pt';
 import {
@@ -24,9 +24,10 @@ import {KeyPickRange} from './KeyStrokeDetect';
 import './Forms.css';
 
 // sub-components
+const Search = Input.Search;
 const Option = Select.Option;
 const {SubMenu, Item} = Menu;
-const ButtonGroup = Button.Group;
+// const ButtonGroup = Button.Group;
 
 const OPTIONS = ['Apples', 'Nails', 'Bananas', 'Helicopters'];
 const defaultOpts = OPTIONS.map(item => (
@@ -557,8 +558,25 @@ class FormBtnsSamples extends Component {
   }
 
   render() {
+    const searchIn = (
+      <Select
+        showSearch
+        showArrow={false}
+        placeholder="Type to search from our list"
+        optionFilterProp="children"
+        onChange={this.funs.selectedInfo}
+        filterOption={this.funs.filterSelDrop}
+        style={{ width: 90 }}
+        notFoundContent="Search parameter does not match with our records"
+      >
+        {defaultOpts}
+      </Select>
+    );
+    const searchBtn = (
+      <Button type="primary" icon="search" />
+    );
     return (
-      <Row gutter={12}>
+      <Row gutter={16}>
         <Col xs={12} sm={8}>
           <Button type="primary">Primary</Button>
           <Button>Default</Button>
@@ -584,30 +602,31 @@ class FormBtnsSamples extends Component {
         <Col xs={12} sm={8}>
           <Button type="primary" shape="circle" icon="search" />
           <Button type="primary" icon="search">Search</Button>
+          <br/>
           <Button shape="circle" icon="search" />
           <Button icon="search">Search</Button>
           <br />
           <Button shape="circle" icon="search" />
           <Button icon="search">Search</Button>
+          <br />
           <Button type="dashed" shape="circle" icon="search" />
           <Button type="dashed" icon="search">Search</Button>
           <Divider orientation="right">
-            With Dropdown
+            With Input
           </Divider>
-          <ButtonGroup>
-            <Select
-              showSearch
-              showArrow={false}
-              placeholder="Select a person"
-              optionFilterProp="children"
-              onChange={this.funs.selectedInfo}
-              filterOption={this.funs.filterSelDrop}
-              notFoundContent="Search parameter does not match with our records"
-            >
-              {defaultOpts}
-            </Select>
-            <Button type="primary" icon="search" />
-          </ButtonGroup>
+          <Search
+            placeholder="input search text"
+            onSearch={value => console.log(value)}
+            enterButton
+          />
+          <Divider orientation="right">
+            With Options
+          </Divider>
+          <Input
+            className="search-select"
+            addonBefore={searchIn}
+            addonAfter={searchBtn}
+          />
         </Col>
         <Col xs={12} sm={8}>
           <Button type="primary" loading>
